@@ -86,3 +86,18 @@ def test_assignment_resubmit_error(client, h_student_1):
     assert response.status_code == 400
     assert error_response['error'] == 'FyleError'
     assert error_response["message"] == 'only a draft assignment can be submitted'
+
+
+def test_get_assignments_without_proper_auth(client, h_student_1_empty):
+    """
+    failure case: Server fails to authenticate since principal_id in header is None
+    """
+    response = client.get(
+        '/student/assignments',
+        headers=h_student_1_empty
+    )
+
+    error_response = response.json
+    assert response.status_code == 403
+    assert error_response['error'] == 'FyleError'
+    assert error_response["message"] == 'requester should be a student'
