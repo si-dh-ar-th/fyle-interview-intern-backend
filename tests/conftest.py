@@ -66,3 +66,39 @@ def h_principal():
     }
 
     return headers
+
+
+@pytest.fixture
+def h_principal_empty():
+    headers = {
+        'X-Principal': json.dumps({
+            'principal_id': None,
+            'user_id': 5
+        })
+    }
+
+    return headers
+
+
+@pytest.fixture
+def h_teacher_1_empty():
+    headers = {
+        'X-Principal': json.dumps({
+            'teacher_id': None,
+            'user_id': 3
+        })
+    }
+
+    return headers
+
+
+@pytest.fixture
+def h_student_1_empty():
+    headers = {
+        'X-Principal': json.dumps({
+            'student_id': None,
+            'user_id': 1
+        })
+    }
+
+    return headers
